@@ -11,8 +11,6 @@ manifest:
       remote: zmkfirmware
       revision: main
       import: app/west.yml
-    - name: englmaxi
-      url-base: https://github.com/englmaxi
     - name: zmk-dongle-display
       remote: englmaxi
       revision: main
