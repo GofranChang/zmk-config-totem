@@ -6,15 +6,9 @@
 
 / {
     chosen {
-        /*
-         * Dongle 本身没有实体按键矩阵。
-         */
         zmk,kscan = &mock_kscan;
-
-        /*
-         * 保持与左右半边相同的 logical matrix。
-         */
         zmk,matrix_transform = &default_transform;
+        zephyr,display = &oled;
     };
 
     mock_kscan: kscan_1 {
@@ -44,5 +38,27 @@
             RC(3,2) RC(3,3) RC(3,4)
             RC(3,5) RC(3,6) RC(3,7)
         >;
+    };
+};
+
+&pro_micro_i2c {
+    status = "okay";
+
+    oled: sh1106@3c {
+        compatible = "sinowealth,sh1106";
+        reg = <0x3c>;
+
+        width = <128>;
+        height = <64>;
+
+        segment-offset = <2>;
+        page-offset = <0>;
+        display-offset = <0>;
+        multiplex-ratio = <63>;
+
+        segment-remap;
+        com-invdir;
+
+        prechargep = <0x22>;
     };
 };
